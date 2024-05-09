@@ -17,6 +17,10 @@ module.exports = withNativeFederation({
     "rxjs/fetch",
     "rxjs/testing",
     "rxjs/webSocket",
-    "taiga-ui",
+    "@nestjs/common",
+    "@nestjs/core",
+    "@nestjs/platform-express",
+    "@nestjs/platform-socket.io",
+    "@nestjs/websockets",
   ],
 });

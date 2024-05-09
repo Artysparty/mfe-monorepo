@@ -15,5 +15,15 @@ module.exports = withNativeFederation({
       requiredVersion: "auto",
     }),
   },
-  skip: ["rxjs/ajax", "rxjs/fetch", "rxjs/testing", "rxjs/webSocket"],
+  skip: [
+    "rxjs/ajax",
+    "rxjs/fetch",
+    "rxjs/testing",
+    "rxjs/webSocket",
+    "@nestjs/common",
+    "@nestjs/core",
+    "@nestjs/platform-express",
+    "@nestjs/platform-socket.io",
+    "@nestjs/websockets",
+  ],
 });
