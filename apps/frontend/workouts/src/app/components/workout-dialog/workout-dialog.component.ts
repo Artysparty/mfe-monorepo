@@ -11,6 +11,7 @@ import { Workout } from '../../types/workouts.type';
 })
 export class WorkoutDialogComponent {
   @Input() workout!: Workout;
+  @Output() emitMessage = new EventEmitter<string>();
   @Output() closeModalEvent = new EventEmitter();
 
   get headerBtnText(): string {
@@ -34,6 +35,7 @@ export class WorkoutDialogComponent {
   }
 
   startTraining() {
+    this.emitMessage.emit('started');
     this.isTraining = true;
     const durationInSeconds = this.getDurationInSeconds();
     let timer = durationInSeconds;

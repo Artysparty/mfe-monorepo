@@ -37,14 +37,32 @@ export class WebsocketGateway
   }
 
   @SubscribeMessage('workouts')
-  async handleMessage(
+  async handleWorkoutsMessage(
     client: Socket,
     text: string,
   ): Promise<WsResponse<string>> {
+    this.logger.log('received message from workouts: ' , text);
     await this.producerService.produce({
       topic: 'workouts',
       messages: [{ value: text }],
     });
     return { event: 'workouts', data: text };
+  }
+
+  @SubscribeMessage('food')
+  async handleFoodMessage(
+    client: Socket,
+    text: string,
+  ): Promise<WsResponse<string>> {
+    this.logger.log('received message from food: ' , text);
+    await this.producerService.produce({
+      topic: 'food',
+      messages: [{ value: text }],
+    });
+    return { event: 'food', data: text };
+  }
+
+  sendToClient(topic: string, message: string): void {
+    this.server.emit(topic, { text: message });
   }
 }

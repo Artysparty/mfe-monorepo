@@ -20,5 +20,6 @@
   <wr-workouts-workout-dialog
     [workout]="selectedWorkout"
     (closeModalEvent)="closeModal()"
+    (emitMessage)="handleEmitMessage($event)"
   />
 }

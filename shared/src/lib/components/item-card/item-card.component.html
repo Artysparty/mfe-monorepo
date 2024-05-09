@@ -1,4 +1,5 @@
 <div
+  *ngIf="imageUrl"
   class="card"
   [ngClass]="{ 'bottomName': bottomName }"
   [ngStyle]="{ 'background-image': 'url(' + imageUrl + ')' }"

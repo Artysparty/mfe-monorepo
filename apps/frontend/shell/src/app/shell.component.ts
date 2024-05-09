@@ -16,24 +16,14 @@ export class ShellComponent implements OnInit {
 
   ngOnInit(): void {
     this.listenToWebSocketEvents();
-    this.emitWebSocketEventAfterDelay();
   }
 
   private listenToWebSocketEvents(): void {
     this.wsService
       .listen('workouts')
       .pipe(untilDestroyed(this))
-      .subscribe((data) => {});
-
-    this.wsService
-      .listen('connected')
-      .pipe(untilDestroyed(this))
-      .subscribe((data) => {});
-  }
-
-  private emitWebSocketEventAfterDelay(): void {
-    setTimeout(() => {
-      this.wsService.emit('workouts', 'asdasd');
-    }, 5000);
+      .subscribe((data) => {
+        console.log('from server', data);
+      });
   }
 }

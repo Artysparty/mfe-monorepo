@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { WorkoutsMock } from './mocks/workouts-mock';
 
-import { ItemCardComponent } from '@ng-mf/shared';
+import { ItemCardComponent, WebsocketService } from '@ng-mf/shared';
 import { WorkoutDialogComponent } from './components/workout-dialog/workout-dialog.component';
 import { NgFor, NgIf } from '@angular/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
@@ -20,6 +20,8 @@ import { Workout } from './types/workouts.type';
 export class WorkoutsComponent {
   readonly workoutsMock = WorkoutsMock;
 
+  constructor(private wsService: WebsocketService) {}
+
   selectedWorkout!: Workout;
 
   isModalOpen = false;
@@ -31,5 +33,10 @@ export class WorkoutsComponent {
   selectWorkout(workout: Workout): void {
     this.selectedWorkout = workout;
     this.isModalOpen = true;
+  }
+
+  handleEmitMessage(message: string): void {
+    console.log('emitted from workouts: ', message);
+    this.wsService.emit('workouts', message);
   }
 }

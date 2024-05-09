@@ -12,7 +12,7 @@ describe('ConsumerService', () => {
     }).compile();
 
     service = module.get<ConsumerService>(ConsumerService);
-    consumer = service['kafka'].consumer({ groupId: 'workouts' });
+    consumer = service['kafka'].consumer({ groupId: 'workouts-app' });
   });
 
   it('should be defined', () => {
