@@ -7,24 +7,69 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@nx/angular:webpack-browser",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@angular-architects/native-federation:build",
+      "options": {},
+      "configurations": {
+        "production": {
+          "target": "homepage:esbuild:production"
+        },
+        "development": {
+          "target": "homepage:esbuild:development",
+          "dev": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "target": "homepage:serve-original:development",
+        "rebuildDelay": 0,
+        "dev": true,
+        "port": 0
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "homepage:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/frontend/homepage/jest.config.ts"
+      }
+    },
+    "esbuild": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/frontend/homepage",
         "index": "apps/frontend/homepage/src/index.html",
-        "main": "apps/frontend/homepage/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js",
+          "es-module-shims"
+        ],
         "tsConfig": "apps/frontend/homepage/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/frontend/homepage/src/favicon.ico",
           "apps/frontend/homepage/src/assets"
         ],
-        "styles": ["apps/frontend/homepage/src/styles.scss"],
+        "styles": [
+          "apps/frontend/homepage/src/styles.scss"
+        ],
         "scripts": [],
-        "customWebpackConfig": {
-          "path": "apps/frontend/homepage/webpack.config.ts"
-        }
+        "browser": "apps/frontend/homepage/src/main.ts"
       },
       "configurations": {
         "production": {
@@ -40,53 +85,16 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all",
-          "customWebpackConfig": {
-            "path": "apps/frontend/homepage/webpack.prod.config.ts"
-          }
+          "outputHashing": "all"
         },
         "development": {
-          "buildOptimizer": false,
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
         }
       },
       "defaultConfiguration": "production"
-    },
-    "serve": {
-      "executor": "@nx/angular:dev-server",
-      "options": {
-        "port": 4202,
-        "publicHost": "http://localhost:4202"
-      },
-      "configurations": {
-        "production": {
-          "buildTarget": "homepage:build:production"
-        },
-        "development": {
-          "buildTarget": "homepage:build:development"
-        }
-      },
-      "defaultConfiguration": "development"
-    },
-    "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
-      "options": {
-        "buildTarget": "homepage:build"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/frontend/homepage/jest.config.ts"
-      }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
@@ -104,6 +112,22 @@
           "buildTarget": "homepage:build:production"
         }
       }
+    },
+    "serve-original": {
+      "executor": "@angular-architects/native-federation:build",
+      "options": {
+        "port": 4202,
+        "publicHost": "http://localhost:4202"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "homepage:esbuild:production"
+        },
+        "development": {
+          "buildTarget": "homepage:esbuild:development"
+        }
+      },
+      "defaultConfiguration": "development"
     }
   }
 }

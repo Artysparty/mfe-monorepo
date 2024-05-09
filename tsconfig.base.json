@@ -10,20 +10,15 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2020", "dom"],
+    "lib": ["es2022", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "food/Routes": [
-        "apps/frontend/food/src/app/remote-entry/entry.routes.ts"
-      ],
-      "homepage/Routes": [
-        "apps/frontend/homepage/src/app/remote-entry/entry.routes.ts"
-      ],
-      "workouts/Routes": [
-        "apps/frontend/workouts/src/app/remote-entry/entry.routes.ts"
-      ]
+      "@ng-mf/shared": ["shared/src/index.ts"],
+      "food/Routes": ["apps/frontend/food/src/app/food.routes.ts"],
+      "homepage/Routes": ["apps/frontend/homepage/src/app/homepage.routes.ts"],
+      "workouts/Routes": ["apps/frontend/workouts/src/app/workouts.routes.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

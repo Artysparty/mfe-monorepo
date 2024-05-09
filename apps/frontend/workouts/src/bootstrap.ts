@@ -1,7 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { RemoteEntryComponent } from './app/remote-entry/entry.component';
+import { workoutsConfig } from './app/workouts.config';
+import { WorkoutsComponent } from './app/workouts.component';
 
-bootstrapApplication(RemoteEntryComponent, appConfig).catch((err) =>
-  console.error(err)
-);
+bootstrapApplication(WorkoutsComponent, workoutsConfig)
+  .catch((err) => console.error(err));

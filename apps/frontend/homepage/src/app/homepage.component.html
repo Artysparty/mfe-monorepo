@@ -1,0 +1,19 @@
+<div class="container">
+  <h1 class="title">Потренируемся!</h1>
+  <ng-container (onClick)="navigate('workouts')">
+    <lib-shared-item-card
+      [name]="'Силовые и кардио тренировки'"
+      [imageUrl]="'../assets/images/img1.png'"
+    />
+  </ng-container>
+
+
+  <h1 class="title">Проголодались?</h1>
+
+  <ng-container (onClick)="navigate('food')">
+    <lib-shared-item-card
+      [name]="'Вкусная еда для здорового питания'"
+      [imageUrl]="'../assets/images/steik.png'"
+    />
+  </ng-container>
+</div>

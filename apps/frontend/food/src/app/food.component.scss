@@ -1,0 +1,10 @@
+.container {
+  max-width: 1000px;
+  margin-right: 80px;
+  margin-left: 80px;
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+}

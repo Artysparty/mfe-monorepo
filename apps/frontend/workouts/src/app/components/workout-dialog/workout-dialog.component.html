@@ -1,0 +1,51 @@
+<div class="modal" (click)="closeModal()">
+  <div class="modal-content" (click)="stopPropagation($event)">
+    <div class="modal-header">
+      <span class="modal-name"> {{ workout.name }}</span>
+
+      <button class="modal-button" (click)="startTimer()">
+        <span>{{ headerBtnText }}</span>
+
+        @if (isTraining) {
+          <span class="mx-1">
+            {{ displayTime }}
+          </span>
+
+          <img src="assets/icons/timer.svg" title="timer" alt="timer" />
+        }
+      </button>
+    </div>
+
+    <div class="modal-description">
+      <div class="modal-desctitle">Упражнения:</div>
+
+      <div class="modal-parts">
+        @for (exercise of workout.exercises; track $index) {
+          <div class="modal-part">
+            <div class="modal-img-container column">
+              <img
+                class="modal-img"
+                [src]="exercise?.imageUrl"
+                title="exercise"
+                alt="exercise"
+              />
+            </div>
+
+            <div class="modal-info column">
+              <span class="modal-exercise mb-2">{{ exercise?.name }}</span>
+              <span>{{ exercise?.description }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (isTraining) {
+      <div class="modal-footer">
+        <button class="modal-button" (click)="closeModal()">
+          Закончить тренировку
+        </button>
+      </div>
+    }
+  </div>
+</div>

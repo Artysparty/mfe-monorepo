@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    @for (workout of workoutsMock; track $index) {
+      <div
+        class="col-12 col-md-6 mt-4"
+        (click)="selectWorkout(workout)"
+      >
+        <lib-shared-item-card
+          [name]="workout.name"
+          [calories]="workout.calories"
+          [duration]="workout.duration"
+          [imageUrl]="workout.imageUrl"
+        />
+      </div>
+    }
+  </div>
+</div>
+
+@if (isModalOpen) {
+  <wr-workouts-workout-dialog
+    [workout]="selectedWorkout"
+    (closeModalEvent)="closeModal()"
+  />
+}

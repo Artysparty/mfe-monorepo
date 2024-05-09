@@ -1,0 +1,49 @@
+<div class="modal" (click)="closeModal()">
+  <div class="modal-content" (click)="stopPropagation($event)">
+    <div class="modal-header">
+      <span class="modal-name">{{ data.name }}</span>
+
+      <button class="modal-button">
+        <span>Дополнить список покупок</span>
+
+        <img src="assets/icons/plus.svg" title="plus" alt="plus" />
+      </button>
+    </div>
+
+    <div class="modal-structure row mb-4">
+      <div class="modal-ingredients col-12 col-sm-6">
+        @for(ingredient of data.ingredients; track $index) {
+          <span>{{ ingredient?.name }}: {{ ingredient?.weight }}гр.</span>
+        }
+      </div>
+
+      <div class="modal-kbzu col-12 col-sm-6">
+        <span>Ккал: {{ data.kbzu.ccal }}</span>
+        <span>Белки: {{ data.kbzu.protein }}</span>
+        <span>Жиры: {{ data.kbzu.fat }}</span>
+        <span>Углеводы: {{ data.kbzu.carbohydrates }}</span>
+      </div>
+    </div>
+
+    <div class="modal-description">
+      <div class="modal-desctitle">Приготовление:</div>
+
+      <div class="row">
+        @for (step of data.steps; track $index) {
+          <div class="col-12 col-sm-6 mb-4">
+            <div class="modal-info column">
+              <span class="modal-exercise mb-2">{{ step?.name }}</span>
+              <span>{{ step?.description }}</span>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="modal-button" (click)="closeModal()">
+        Закрыть рецепт
+      </button>
+    </div>
+  </div>
+</div>
