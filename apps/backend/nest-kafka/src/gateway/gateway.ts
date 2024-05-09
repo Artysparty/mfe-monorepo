@@ -12,6 +12,7 @@ import {
 import { Server, Socket } from 'socket.io';
 
 import { ProducerService } from '../kafka/producer.service';
+import { ConsumerService } from '../kafka/consumer.service';
 
 @WebSocketGateway(3001, { cors: true })
 export class WebsocketGateway
@@ -19,7 +20,10 @@ export class WebsocketGateway
 {
   private logger: Logger = new Logger('WebsocketGateway');
 
-  constructor(private readonly producerService: ProducerService) {}
+  constructor(
+    private readonly producerService: ProducerService,
+    private readonly consumerService: ConsumerService,
+  ) {}
 
   @WebSocketServer() server: Server;
 
@@ -41,7 +45,6 @@ export class WebsocketGateway
     client: Socket,
     text: string,
   ): Promise<WsResponse<string>> {
-    this.logger.log('received message from workouts: ' , text);
     await this.producerService.produce({
       topic: 'workouts',
       messages: [{ value: text }],
@@ -54,12 +57,28 @@ export class WebsocketGateway
     client: Socket,
     text: string,
   ): Promise<WsResponse<string>> {
-    this.logger.log('received message from food: ' , text);
     await this.producerService.produce({
       topic: 'food',
       messages: [{ value: text }],
     });
     return { event: 'food', data: text };
+  }
+
+  @SubscribeMessage('actions')
+  async handleActionsMessage(
+    client: Socket,
+    text: string,
+  ): Promise<WsResponse<string>> {
+    // TODO: Как дергать сообщения из топика по запросу а не по подписке????
+    if (text === 'getWorkouts') {
+      const message = this.consumerService.getLatestWrMessage();
+      this.sendToClient('workouts', message)
+    } else if (text === 'getFood') {
+      const message = this.consumerService.getLatestFdMessage();
+      this.sendToClient('food', message)
+    }
+
+    return { event: 'actions', data: text };
   }
 
   sendToClient(topic: string, message: string): void {

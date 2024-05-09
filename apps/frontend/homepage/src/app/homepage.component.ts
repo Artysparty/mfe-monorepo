@@ -13,7 +13,6 @@ export class HomepageComponent {
   constructor(private router: Router) {}
 
   navigate(url: string): void {
-    console.log('navigate')
     this.router.navigateByUrl(`/${url}`);
   }
 }

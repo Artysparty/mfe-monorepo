@@ -36,7 +36,6 @@ export class WorkoutsComponent {
   }
 
   handleEmitMessage(message: string): void {
-    console.log('emitted from workouts: ', message);
     this.wsService.emit('workouts', message);
   }
 }

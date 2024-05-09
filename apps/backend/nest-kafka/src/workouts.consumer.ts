@@ -1,23 +1,24 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConsumerService } from './kafka/consumer.service';
-import { WebsocketGateway } from './gateway/gateway';
 
 @Injectable()
 export class WorkoutsConsumer implements OnModuleInit {
+  private logger: Logger = new Logger('WorkoutsConsumer');
   constructor(
     private readonly consumerService: ConsumerService,
-    private readonly websocketGateway: WebsocketGateway,
   ) {}
   async onModuleInit() {
     await this.consumerService.consume(
-      { topics: ['workouts'] },
+      { topics: ['workouts', 'food'] },
       {
-        eachMessage: async ({ topic, partition, message }) => {
-          // if (message.value?.toString() === 'started') {
-            this.websocketGateway.sendToClient(topic, message?.value?.toString())
-          // }
-        }
-      },
+        eachMessage: async ({ topic, message }) => {
+          if (topic === 'workouts') {
+            this.consumerService.saveWorkoutsMessage(message.value?.toString());
+          } else if (topic === 'food') {
+            this.consumerService.saveFoodMessage(message.value?.toString());
+          }
+        },
+      }
     );
   }
 }
