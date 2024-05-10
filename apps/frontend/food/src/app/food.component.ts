@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
+import {
+  ItemCardComponent,
+  TOPICS,
+  MESSAGES,
+  WebsocketService,
+} from '@ng-mf/shared';
+
 import { FoodMock } from './mocks/food-mock';
 import { FoodDialogComponent } from './components/food-dialog/food-dialog.component';
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Food } from './types/food.type';
-import { ItemCardComponent, WebsocketService } from '@ng-mf/shared';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -18,7 +25,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
     FoodDialogComponent,
     NgIf,
     NgFor,
-    AsyncPipe
+    AsyncPipe,
   ],
   templateUrl: './food.component.html',
   styleUrl: './food.component.scss',
@@ -27,27 +34,25 @@ export class FoodComponent implements OnInit {
   foods = FoodMock;
   selectedFood!: Food;
   isModalOpen = false;
-  showAlert = false;
-  message$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  showWorkoutAlert = false;
 
   constructor(private wsService: WebsocketService) {
     this.listenToWebSocketEvents();
   }
 
   ngOnInit(): void {
-    this.wsService.emit('actions', 'getWorkouts')
+    this.wsService.emit(TOPICS.actions, MESSAGES.getWorkouts);
   }
 
   private listenToWebSocketEvents(): void {
     this.wsService
-      .listen('workouts')
+      .listen(TOPICS.workouts)
       .pipe(untilDestroyed(this))
       .subscribe((data) => {
-        if (data?.text === 'started') {
-          this.showAlert = true;
-          this.message$.next(data?.text);
+        if (data?.text === MESSAGES.workoutStarted) {
+          this.showWorkoutAlert = true;
         } else {
-          this.showAlert = false;
+          this.showWorkoutAlert = false;
         }
       });
   }

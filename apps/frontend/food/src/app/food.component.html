@@ -1,11 +1,24 @@
-<div class="container">
-  <div class="alert">
-    {{ message$ | async }}
+<div class="max-w-screen-lg">
+  <div class="rounded-lg p-5">
+    <h2>У вас была тяжелая тренировка? Предлагаем блюда с высоким содержанием белка!</h2>
+    <div class="grid grid-cols-2">
+      @for (food of foods; track $index) {
+        @if (food.kbzu.protein > 15) {
+          <div (onClick)="selectFood(food)">
+            <lib-shared-item-card
+              [name]="food.name"
+              [calories]="food.kbzu.ccal"
+              [imageUrl]="food.imageUrl"
+            />
+          </div>
+        }
+      }
+    </div>
   </div>
 
-  <div class="row">
+  <div class="grid grid-rows-1">
     @for (food of foods; track $index) {
-      <div class="col-12 col-md-6 mt-4" (onClick)="selectFood(food)">
+      <div (onClick)="selectFood(food)">
         <lib-shared-item-card
           [name]="food.name"
           [calories]="food.kbzu.ccal"

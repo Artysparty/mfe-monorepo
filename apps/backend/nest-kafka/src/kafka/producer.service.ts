@@ -3,7 +3,7 @@ import {
   OnApplicationShutdown,
   OnModuleInit,
 } from '@nestjs/common';
-import { Kafka, Producer, ProducerRecord } from 'kafkajs';
+import { Kafka, Partitioners, Producer, ProducerRecord } from 'kafkajs';
 
 @Injectable()
 export class ProducerService implements OnModuleInit, OnApplicationShutdown {
@@ -13,7 +13,9 @@ export class ProducerService implements OnModuleInit, OnApplicationShutdown {
   private readonly producer: Producer;
 
   constructor() {
-    this.producer = this.kafka.producer();
+    this.producer = this.kafka.producer({
+      createPartitioner: Partitioners.LegacyPartitioner,
+    });
   }
 
   async onModuleInit() {

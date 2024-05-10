@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { WorkoutsMock } from './mocks/workouts-mock';
 
-import { ItemCardComponent, WebsocketService } from '@ng-mf/shared';
+import { ItemCardComponent, TOPICS, WebsocketService } from '@ng-mf/shared';
 import { WorkoutDialogComponent } from './components/workout-dialog/workout-dialog.component';
 import { NgFor, NgIf } from '@angular/common';
 import { UntilDestroy } from '@ngneat/until-destroy';
@@ -36,6 +36,6 @@ export class WorkoutsComponent {
   }
 
   handleEmitMessage(message: string): void {
-    this.wsService.emit('workouts', message);
+    this.wsService.emit(TOPICS.workouts, message);
   }
 }

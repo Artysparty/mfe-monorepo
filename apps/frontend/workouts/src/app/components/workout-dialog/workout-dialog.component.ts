@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
+
+import { MESSAGES } from '@ng-mf/shared';
+
 import { Workout } from '../../types/workouts.type';
 
 @Component({
@@ -35,7 +38,7 @@ export class WorkoutDialogComponent {
   }
 
   startTraining() {
-    this.emitMessage.emit('started');
+    this.emitMessage.emit(MESSAGES.workoutStarted);
     this.isTraining = true;
     const durationInSeconds = this.getDurationInSeconds();
     let timer = durationInSeconds;
