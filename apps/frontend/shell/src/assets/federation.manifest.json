@@ -1,5 +1,6 @@
 {
 	"workouts": "http://localhost:4201/remoteEntry.json",
 	"homepage": "http://localhost:4202/remoteEntry.json",
-	"food": "http://localhost:4203/remoteEntry.json"
+	"food": "http://localhost:4203/remoteEntry.json",
+	"shopping-list": "http://localhost:4204/remoteEntry.json"
 }

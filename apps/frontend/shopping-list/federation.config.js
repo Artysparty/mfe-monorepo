@@ -4,8 +4,10 @@ const {
 } = require("@angular-architects/native-federation/config");
 
 module.exports = withNativeFederation({
-  name: 'shell',
-  
+  name: "shopping-list",
+  exposes: {
+    "./Component": "./apps/frontend/shopping-list/src/app/shopping-list.component.ts",
+  },
   shared: {
     ...shareAll({
       singleton: true,
@@ -13,7 +15,6 @@ module.exports = withNativeFederation({
       requiredVersion: "auto",
     }),
   },
-
   skip: [
     "rxjs/ajax",
     "rxjs/fetch",

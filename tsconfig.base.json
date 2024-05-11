@@ -18,7 +18,8 @@
       "@ng-mf/shared": ["shared/src/index.ts"],
       "food/Routes": ["apps/frontend/food/src/app/food.routes.ts"],
       "homepage/Routes": ["apps/frontend/homepage/src/app/homepage.routes.ts"],
-      "workouts/Routes": ["apps/frontend/workouts/src/app/workouts.routes.ts"]
+      "workouts/Routes": ["apps/frontend/workouts/src/app/workouts.routes.ts"],
+      "shopping-list/Routes": ["apps/frontend/shopping-list/src/app/shopping-list.routes.ts"],
     }
   },
   "exclude": ["node_modules", "tmp"]

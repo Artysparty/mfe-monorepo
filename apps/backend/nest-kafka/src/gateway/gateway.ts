@@ -64,6 +64,18 @@ export class WebsocketGateway
     return { event: 'food', data: text };
   }
 
+  @SubscribeMessage('sl')
+  async handleShoppingListMessage(
+    client: Socket,
+    text: string,
+  ): Promise<WsResponse<string>> {
+    await this.producerService.produce({
+      topic: 'sl',
+      messages: [{ value: text }],
+    });
+    return { event: 'sl', data: text };
+  }
+
   @SubscribeMessage('actions')
   async handleActionsMessage(
     client: Socket,
@@ -76,6 +88,9 @@ export class WebsocketGateway
     } else if (text === 'getFood') {
       const message = this.consumerService.getLatestFdMessage();
       this.sendToClient('food', message)
+    } else if (text === 'getShoppingList') {
+      const message = this.consumerService.getLatestSlMessage();
+      this.sendToClient('sl', message)
     }
 
     return { event: 'actions', data: text };

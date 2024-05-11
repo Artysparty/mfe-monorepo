@@ -1,37 +1,34 @@
-<div class="max-w-screen-lg">
-  <div class="rounded-lg p-5">
-    <h2>У вас была тяжелая тренировка? Предлагаем блюда с высоким содержанием белка!</h2>
-    <div class="grid grid-cols-2">
-      @for (food of foods; track $index) {
-        @if (food.kbzu.protein > 15) {
-          <div (onClick)="selectFood(food)">
-            <lib-shared-item-card
-              [name]="food.name"
-              [calories]="food.kbzu.ccal"
-              [imageUrl]="food.imageUrl"
-            />
-          </div>
-        }
-      }
-    </div>
-  </div>
-
-  <div class="grid grid-rows-1">
+<div class="flex flex-col rounded-lg p-5 bg-dark-grey my-2">
+  <h2 class="text-white text-xl mb-2">У вас была тяжелая тренировка? Предлагаем блюда с высоким содержанием белка!</h2>
+  <div class="flex flex-wrap gap-4">
     @for (food of foods; track $index) {
-      <div (onClick)="selectFood(food)">
+      @if (food.kbzu.protein > 15) {
         <lib-shared-item-card
           [name]="food.name"
           [calories]="food.kbzu.ccal"
           [imageUrl]="food.imageUrl"
+          (click)="selectFood(food)"
         />
-      </div>
+      }
     }
   </div>
+</div>
+
+<div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+  @for (food of foods; track $index) {
+    <lib-shared-item-card
+      [name]="food.name"
+      [calories]="food.kbzu.ccal"
+      [imageUrl]="food.imageUrl"
+      (click)="selectFood(food)"
+    />
+  }
 </div>
 
 @if (isModalOpen) {
   <wr-food-food-dialog
     [data]="selectedFood"
     (closeModalEvent)="closeModal()"
+    (sendSlMessage)="sendSlMessage($event)"
   />
 }

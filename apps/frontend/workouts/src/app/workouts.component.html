@@ -1,17 +1,32 @@
-<div class="container">
-  <div class="row">
+<div class="flex flex-col">
+  <div class="flex flex-col rounded-lg p-5 bg-dark-grey my-2">
+    <h2 class="text-white text-xl mb-4">
+      Кажется, вы плотно позавтракали! Кардио тренировки для вас:
+    </h2>
+    <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      @for (workout of workoutsMock; track $index) {
+        @if (workout.calories > 400) {
+          <lib-shared-item-card
+            [name]="workout.name"
+            [calories]="workout.calories"
+            [duration]="workout.duration"
+            [imageUrl]="workout.imageUrl"
+            (click)="selectWorkout(workout)"
+          />
+        }
+      }
+    </div>
+  </div>
+  
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
     @for (workout of workoutsMock; track $index) {
-      <div
-        class="col-12 col-md-6 mt-4"
-        (click)="selectWorkout(workout)"
-      >
         <lib-shared-item-card
           [name]="workout.name"
           [calories]="workout.calories"
           [duration]="workout.duration"
           [imageUrl]="workout.imageUrl"
+          (click)="selectWorkout(workout)"
         />
-      </div>
     }
   </div>
 </div>

@@ -1,48 +1,22 @@
-$primary-color: white;
-$shadow-color: rgba(0, 0, 0, 0.2);
-
 .card {
-    color: $primary-color;
-    box-shadow: 5px 5px 10px 6px $shadow-color;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    background-size: 105%;
-    background-position: center;
-    position: relative;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 25vh;
+    @apply
+        flex
+        flex-col
+        justify-between
+        cursor-pointer
+        max-w-md
+        text-white
+        rounded-lg
+        min-h-52
+        p-6
+        shadow-md
+        bg-full
+        bg-top
+        hover:translate-y-1
+        hover:translate-x-1
+        transition-all;
+}
 
-    &:hover {
-        transform: translate(-5px, -5px);
-    }
-
-    &.calories-icon {
-        color: $primary-color;
-    }
-
-    &-info {
-        display: flex;
-        justify-content: end;
-        gap: 10px;
-        font-weight: 300;
-    }
-
-    &-calories, &-duration {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-
-        img {
-            width: 22px;
-            height: 22px;
-        }
-    }
-
-    &-title {
-      font-size: 28px;
-    }
+.card-info {
+    @apply flex justify-end gap-2.5 font-light
 }

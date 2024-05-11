@@ -64,4 +64,8 @@ export class FoodComponent implements OnInit {
     this.selectedFood = food;
     this.isModalOpen = true;
   }
+
+  sendSlMessage(raiforts: string) {
+    this.wsService.emit(TOPICS.sl, raiforts);
+  }
 }

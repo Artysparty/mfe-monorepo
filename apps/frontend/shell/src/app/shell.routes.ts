@@ -19,7 +19,11 @@ export const APP_ROUTES: Routes = [
     loadComponent: () =>
       loadRemoteModule('food', './Component').then((m) => m.FoodComponent),
   },
-
+  {
+    path: 'shopping-list',
+    loadComponent: () =>
+      loadRemoteModule('shopping-list', './Component').then((m) => m.ShoppingListComponent),
+  },
   {
     path: '**',
     loadComponent: () =>

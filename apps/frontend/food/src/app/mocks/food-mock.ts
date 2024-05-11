@@ -2,30 +2,26 @@ import { Food } from '../types/food.type';
 
 export const FoodMock: Food[] = [
   {
-    name: 'Индейка в сливочном соусе',
+    name: 'Запеченый Дорадо',
     ingredients: [
       {
-        name: 'Индейка',
+        name: 'Дорадо',
         weight: 600,
       },
       {
-        name: 'Сливки',
-        weight: 300,
+        name: 'Приправы',
+        weight: 20,
       },
       {
-        name: 'Сыр',
-        weight: 200,
-      },
-      {
-        name: 'Чеснок',
-        weight: 30,
+        name: 'Лимон',
+        weight: 100,
       },
     ],
     kbzu: {
-      ccal: 220,
-      protein: 15,
-      fat: 21,
-      carbohydrates: 20,
+      ccal: 163,
+      protein: 23,
+      fat: 6,
+      carbohydrates: 7,
     },
     steps: [
       {
@@ -36,12 +32,8 @@ export const FoodMock: Food[] = [
         name: 'Шаг 2',
         description: 'Лялляляляляллялялялялляляля',
       },
-      {
-        name: 'Шаг 3',
-        description: 'Лялляляляляллялялялялляляля',
-      },
     ],
-    imageUrl: '../assets/images/indeika.png',
+    imageUrl: '../assets/images/dorado.png',
   },
   {
     name: 'Индейка в сливочном соусе',
@@ -123,6 +115,49 @@ export const FoodMock: Food[] = [
     ],
     imageUrl: '../assets/images/steik.png',
   },
+
+  {
+    name: 'Индейка в сливочном соусе',
+    ingredients: [
+      {
+        name: 'Индейка',
+        weight: 600,
+      },
+      {
+        name: 'Сливки',
+        weight: 300,
+      },
+      {
+        name: 'Сыр',
+        weight: 200,
+      },
+      {
+        name: 'Чеснок',
+        weight: 30,
+      },
+    ],
+    kbzu: {
+      ccal: 220,
+      protein: 15,
+      fat: 21,
+      carbohydrates: 20,
+    },
+    steps: [
+      {
+        name: 'Шаг 1',
+        description: 'Лялляляляляллялялялялляляля',
+      },
+      {
+        name: 'Шаг 2',
+        description: 'Лялляляляляллялялялялляляля',
+      },
+      {
+        name: 'Шаг 3',
+        description: 'Лялляляляляллялялялялляляля',
+      },
+    ],
+    imageUrl: '../assets/images/indeika.png',
+  },
   {
     name: 'Запеченый Дорадо',
     ingredients: [
@@ -156,5 +191,47 @@ export const FoodMock: Food[] = [
       },
     ],
     imageUrl: '../assets/images/dorado.png',
+  },
+  {
+    name: 'Индейка в сливочном соусе',
+    ingredients: [
+      {
+        name: 'Индейка',
+        weight: 600,
+      },
+      {
+        name: 'Сливки',
+        weight: 300,
+      },
+      {
+        name: 'Сыр',
+        weight: 200,
+      },
+      {
+        name: 'Чеснок',
+        weight: 30,
+      },
+    ],
+    kbzu: {
+      ccal: 220,
+      protein: 15,
+      fat: 21,
+      carbohydrates: 20,
+    },
+    steps: [
+      {
+        name: 'Шаг 1',
+        description: 'Лялляляляляллялялялялляляля',
+      },
+      {
+        name: 'Шаг 2',
+        description: 'Лялляляляляллялялялялляляля',
+      },
+      {
+        name: 'Шаг 3',
+        description: 'Лялляляляляллялялялялляляля',
+      },
+    ],
+    imageUrl: '../assets/images/indeika.png',
   },
 ];

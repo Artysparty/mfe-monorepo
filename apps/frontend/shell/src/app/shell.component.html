@@ -16,4 +16,13 @@
   </div>
 </div>
 
-<router-outlet></router-outlet>
+<div class="flex justify-center">
+  <div class="max-w-screen-xl">
+    <router-outlet></router-outlet>
+    
+    <button *ngIf="backBtnVisible" class="p-2 mt-4 text-white rounded-md bg-dark-grey shadow-lg flex" (click)="navigateByUrl('')">
+      <img src="../assets/icons/arrow-back.svg" alt="arrow-back" title="arrow-back">
+      <span>Назад</span>
+    </button>
+  </div>
+</div>

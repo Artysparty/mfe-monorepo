@@ -1,21 +1,20 @@
 {
-  "name": "shell",
+  "name": "shopping-list",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "prefix": "wr-shell",
-  "sourceRoot": "apps/frontend/shell/src",
+  "prefix": "wr-sl",
+  "sourceRoot": "apps/frontend/shopping-list/src",
   "tags": [],
-  "implicitDependencies": ["workouts", "food", "homepage", "shopping-list"],
   "targets": {
     "build": {
       "executor": "@angular-architects/native-federation:build",
       "options": {},
       "configurations": {
         "production": {
-          "target": "shell:esbuild:production"
+          "target": "shopping-list:esbuild:production"
         },
         "development": {
-          "target": "shell:esbuild:development",
+          "target": "shopping-list:esbuild:development",
           "dev": true
         }
       },
@@ -24,7 +23,7 @@
     "serve": {
       "executor": "@angular-architects/native-federation:build",
       "options": {
-        "target": "shell:serve-original:development",
+        "target": "shopping-list:serve-original:development",
         "rebuildDelay": 0,
         "dev": true,
         "port": 0
@@ -33,7 +32,7 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "buildTarget": "shell:build"
+        "buildTarget": "shopping-list:build"
       }
     },
     "lint": {
@@ -45,7 +44,7 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "apps/frontend/shell/jest.config.ts"
+        "jestConfig": "apps/frontend/shopping-list/jest.config.ts"
       }
     },
     "esbuild": {
@@ -54,23 +53,23 @@
         "{options.outputPath}"
       ],
       "options": {
-        "outputPath": "dist/apps/frontend/shell",
-        "index": "apps/frontend/shell/src/index.html",
+        "outputPath": "dist/apps/frontend/shopping-list",
+        "index": "apps/frontend/shopping-list/src/index.html",
         "polyfills": [
           "zone.js",
           "es-module-shims"
         ],
-        "tsConfig": "apps/frontend/shell/tsconfig.app.json",
+        "tsConfig": "apps/frontend/shopping-list/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/frontend/shell/src/favicon.ico",
-          "apps/frontend/shell/src/assets"
+          "apps/frontend/shopping-list/src/favicon.ico",
+          "apps/frontend/shopping-list/src/assets"
         ],
         "styles": [
-          "apps/frontend/shell/src/styles.scss"
+          "apps/frontend/shopping-list/src/styles.scss"
         ],
         "scripts": [],
-        "browser": "apps/frontend/shell/src/main.ts"
+        "browser": "apps/frontend/shopping-list/src/main.ts"
       },
       "configurations": {
         "production": {
@@ -97,18 +96,35 @@
       },
       "defaultConfiguration": "production"
     },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "shopping-list:build",
+        "port": 4204,
+        "watch": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "shopping-list:build:development"
+        },
+        "production": {
+          "buildTarget": "shopping-list:build:production"
+        }
+      }
+    },
     "serve-original": {
       "executor": "@angular-architects/native-federation:build",
       "options": {
-        "port": 4200,
-        "publicHost": "http://localhost:4200"
+        "port": 4204,
+        "publicHost": "http://localhost:4204"
       },
       "configurations": {
         "production": {
-          "buildTarget": "shell:esbuild:production"
+          "buildTarget": "shopping-list:esbuild:production"
         },
         "development": {
-          "buildTarget": "shell:esbuild:development"
+          "buildTarget": "shopping-list:esbuild:development"
         }
       },
       "defaultConfiguration": "development"

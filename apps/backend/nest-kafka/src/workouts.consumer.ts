@@ -9,13 +9,15 @@ export class WorkoutsConsumer implements OnModuleInit {
   ) {}
   async onModuleInit() {
     await this.consumerService.consume(
-      { topics: ['workouts', 'food'] },
+      { topics: ['workouts', 'food', 'sl'] },
       {
         eachMessage: async ({ topic, message }) => {
           if (topic === 'workouts') {
             this.consumerService.saveWorkoutsMessage(message.value?.toString());
           } else if (topic === 'food') {
             this.consumerService.saveFoodMessage(message.value?.toString());
+          } else if (topic === 'sl') {
+            this.consumerService.saveSlMessage(message.value?.toString());
           }
         },
       }

@@ -12,6 +12,9 @@ import { Food } from '../../types/food.type';
 export class FoodDialogComponent {
   @Input() data!: Food;
   @Output() closeModalEvent = new EventEmitter();
+  @Output() sendSlMessage = new EventEmitter<string>();
+
+  addButtonPushed = false;
 
   closeModal() {
     this.closeModalEvent.emit();
@@ -19,5 +22,15 @@ export class FoodDialogComponent {
 
   stopPropagation(event: Event) {
     event.stopPropagation();
+  }
+
+  sendSlEvent() {
+    this.addButtonPushed = true;
+    setTimeout(() => {
+      this.addButtonPushed = false;
+    }, 2000)
+    this.sendSlMessage.emit(
+      this.data?.ingredients?.map((el) => el.name).join(',')
+    );
   }
 }

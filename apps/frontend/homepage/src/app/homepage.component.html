@@ -1,16 +1,28 @@
-<div class="container">
-  <h1 class="title">Потренируемся!</h1>
-  <lib-shared-item-card
-    [name]="'Силовые и кардио тренировки'"
-    [imageUrl]="'../assets/images/img1.png'"
-    (click)="navigate('workouts')"
-  />
+<div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+  <div class="flex flex-col">
+    <h1 class="text-white my-2 font-normal text-xl">Потренируемся?</h1>
+    <lib-shared-item-card
+      [name]="'Силовые и кардио тренировки'"
+      [imageUrl]="'../assets/images/workouts-main.jpg'"
+      (click)="navigate('workouts')"
+    />
+  </div>
 
-  <h1 class="title">Проголодались?</h1>
+  <div class="flex flex-col">
+    <h1 class="text-white my-2 font-normal text-xl">Ваш список покупок</h1>
+    <lib-shared-item-card
+      [name]="'Список покупок'"
+      [imageUrl]="'../assets/images/list-main.jpg'"
+      (click)="navigate('shopping-list')"
+    />
+  </div>
 
-  <lib-shared-item-card
-    [name]="'Вкусная еда для здорового питания'"
-    [imageUrl]="'../assets/images/steik.png'"
-    (click)="navigate('food')"
-  />
+  <div class="flex flex-col">
+    <h1 class="text-white my-2 font-normal text-xl">Проголодались?</h1>
+    <lib-shared-item-card
+      [name]="'Вкусная и здоровая еда'"
+      [imageUrl]="'../assets/images/food-main.jpeg'"
+      (click)="navigate('food')"
+    />
+  </div>
 </div>

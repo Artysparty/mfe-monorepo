@@ -10,6 +10,7 @@ import {
 export class ConsumerService implements OnApplicationShutdown {
   private wrmessages = [];
   private fdmessages = [];
+  private slMessages = [];
   private readonly kafka = new Kafka({
     brokers: ['localhost:9092'],
   });
@@ -39,11 +40,19 @@ export class ConsumerService implements OnApplicationShutdown {
     this.fdmessages.push(message);
   }
 
+  saveSlMessage(message: string): void {
+    this.slMessages.push(message);
+  }
+
   getLatestWrMessage(): string {
     return this.wrmessages[this.wrmessages?.length-1];
   }
 
   getLatestFdMessage(): string {
     return this.fdmessages[this.fdmessages?.length-1];
+  }
+  
+  getLatestSlMessage(): string {
+    return this.slMessages[this.slMessages?.length-1];
   }
 }

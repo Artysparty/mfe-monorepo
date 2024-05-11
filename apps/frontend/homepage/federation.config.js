@@ -22,6 +22,7 @@ module.exports = withNativeFederation({
     "@nestjs/platform-express",
     "@nestjs/platform-socket.io",
     "@nestjs/websockets",
+    "@nx/angular"
   ],
 
 });
