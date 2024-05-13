@@ -81,7 +81,6 @@ export class WebsocketGateway
     client: Socket,
     text: string,
   ): Promise<WsResponse<string>> {
-    // TODO: Как дергать сообщения из топика по запросу а не по подписке????
     if (text === 'getWorkouts') {
       const message = this.consumerService.getLatestWrMessage();
       this.sendToClient('workouts', message)
